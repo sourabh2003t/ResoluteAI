@@ -15,7 +15,7 @@ import TableHead from '@mui/material/TableHead'
 import TableContainer from '@mui/material/TableContainer'
 import IconButton from '@mui/material/IconButton'
 import Tooltip from '@mui/material/Tooltip'
-import Button from '@mui/material/Button'
+import Button from '@mui/material/Button' 
 import Dialog from '@mui/material/Dialog'
 import DialogTitle from '@mui/material/DialogTitle'
 import DialogContent from '@mui/material/DialogContent'
@@ -28,9 +28,10 @@ import MenuItem from '@mui/material/MenuItem'
 import VisibilityIcon from '@mui/icons-material/Visibility'
 import EditIcon from '@mui/icons-material/Edit'
 import DeleteIcon from '@mui/icons-material/Delete'
+import { getAuth } from 'firebase/auth';
 
 // Import db Firestore instance
-import { collection, addDoc, deleteDoc, doc, getDocs } from 'firebase/firestore'
+import { collection, addDoc, deleteDoc, doc, getDocs, query, where } from 'firebase/firestore'
 
 import { db } from '../../../firebase'
 
@@ -40,7 +41,8 @@ const TicketPage = () => {
     description: '',
     priority: '',
     category: '',
-    attachment: null,
+
+    // attachment: null,
     contactEmail: '',
     phoneNumber: '',
     dueDate: '',
@@ -56,18 +58,43 @@ const TicketPage = () => {
 
   const fetchTickets = async () => {
     try {
-      const querySnapshot = await getDocs(collection(db, 'submissions'))
-      const ticketsData = querySnapshot.docs.map(doc => ({ ...doc.data(), id: doc.id }))
+      const auth = getAuth();
+      const user = auth.currentUser;
+  
+      if (!user) {
+        console.error('User not logged in!');
 
-      setTickets(ticketsData) // Store tickets in state
+        return;
+      }
+  
+      let ticketsQuery;
+  
+      if (user.email === 'agent@support.com') {
+
+        // Admin: Fetch all tickets
+        ticketsQuery = collection(db, 'submissions');
+      } else {
+
+        // Regular user: Fetch only their own tickets
+        ticketsQuery = query(collection(db, 'submissions'), where('createdBy', '==', user.email));
+      }
+  
+      const querySnapshot = await getDocs(ticketsQuery);
+      const ticketsData = querySnapshot.docs.map(doc => ({ ...doc.data(), id: doc.id }));
+  
+      setTickets(ticketsData); // Store tickets in state
     } catch (error) {
-      console.error('Error fetching tickets: ', error)
+      console.error('Error fetching tickets: ', error);
     }
-  }
+  };
+  
+  
 
   useEffect(() => {
     fetchTickets() // Fetch tickets when the component mounts
-  }, []) // Empty array ensures it runs only once on mount
+  }, [])
+  
+  // Empty array ensures it runs only once on mount
 
   const handleChange = e => {
     const { name, value, type, checked, files } = e.target
@@ -79,26 +106,41 @@ const TicketPage = () => {
   }
 
   const handleSubmit = async e => {
-    e.preventDefault()
-
+    e.preventDefault();
+  
     // Simple validation
     if (!formData.title || !formData.contactEmail) {
-      alert('Title and Email are required.')
+      alert('Title and Email are required.');
 
-      return
+      return;
     }
-
+  
     try {
-      await addDoc(collection(db, 'submissions'), formData)
-      alert('Form submitted successfully!')
-      setOpenModal(false) // Close modal after submission
-      // Add the new ticket to the tickets state
-      setTickets([...tickets, formData])
+      const auth = getAuth();
+      const user = auth.currentUser;
+  
+      if (!user) {
+        alert('User not logged in!');
+        
+        return;
+      }
+  
+      const submissionData = {
+        ...formData,
+        createdBy: user.email, // Store the logged-in user's email
+        timestamp: new Date()
+      };
+  
+      await addDoc(collection(db, 'submissions'), submissionData);
+      alert('Form submitted successfully!');
+      setOpenModal(false); // Close modal after submission
+      setTickets([...tickets, submissionData]);
     } catch (error) {
-      console.error('Error adding document: ', error)
-      alert('Submission failed!')
+      console.error('Error adding document: ', error);
+      alert('Submission failed!');
     }
-  }
+  };
+  
 
   const handleEdit = ticket => {
     setFormData(ticket) // Assuming you want to pre-fill the form with existing ticket data
@@ -248,7 +290,7 @@ const TicketPage = () => {
               </Select>
             </FormControl>
 
-            <TextField
+            {/* <TextField
               label='Attachment'
               type='file'
               fullWidth
@@ -258,7 +300,7 @@ const TicketPage = () => {
                 shrink: true
               }}
               sx={{ borderRadius: '8px', backgroundColor: '#F9FAFB' }}
-            />
+            /> */}
 
             <TextField
               label='Email'
