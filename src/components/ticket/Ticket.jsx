@@ -217,7 +217,7 @@ const TicketPage = () => {
                   <Tooltip title='Delete'>
                     <IconButton
                       size='small'
-                      onClick={() => handleDelete(ticket)}
+                      onClick={() => handleDelete(ticket.id)}
                       sx={{
                         color: 'inherit',
                         '&:hover': { color: 'red' }
