@@ -11,7 +11,6 @@
     "lint": "next lint",
     "lint:fix": "next lint --fix",
     "format": "prettier --write \"src//*.{js,jsx,ts,tsx}\"",
-    "postinstall": "npm run build:icons"
   },
   "dependencies": {
     "@emotion/cache": "^11.14.0",
