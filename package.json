@@ -10,7 +10,7 @@
     "start": "next start",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
-    "format": "prettier --write \"src//*.{js,jsx,ts,tsx}\"",
+    "format": "prettier --write \"src//*.{js,jsx,ts,tsx}\""
   },
   "dependencies": {
     "@emotion/cache": "^11.14.0",
