@@ -1,11 +1,11 @@
-module.exports = {
+export default {
   async redirects() {
     return [
       {
-        source: '/login',
-        destination: '/',
-        permanent: true,
+        source: '/',
+        destination: '/login',
+        permanent: true, // Set to false if this is temporary
       },
-    ]
+    ];
   },
-}
+};
