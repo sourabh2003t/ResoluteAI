@@ -257,7 +257,7 @@ const TicketPage = () => {
               fullWidth
               value={formData.title}
               onChange={handleChange}
-              sx={{ borderRadius: '8px'' }}
+              sx={{ borderRadius: '8px' }}
             />
             <TextField
               label='Description'
