@@ -47,7 +47,7 @@ const Login = ({ mode }) => {
   const lightImg = '/images/pages/auth-v1-mask-light.png'
 
   // Hooks
-  const router = useRouter()
+  const router = useRouter();
   const authBackground = useImageVariant(mode, lightImg, darkImg)
   const handleClickShowPassword = () => setIsPasswordShown(show => !show)
 
@@ -60,7 +60,7 @@ const Login = ({ mode }) => {
       console.log('User logged in');
 
       // ✅ Redirect to the base path (`/`)
-      router.push('/');
+      router.replace('/');
     } catch (error) {
       console.error('Login failed:', error);
       setError(error.message);
