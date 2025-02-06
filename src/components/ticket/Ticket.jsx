@@ -164,7 +164,6 @@ const TicketPage = () => {
   return (
     <Card>
       <div className='flex justify-end p-4'>
-         <VerticalMenu />
         <Button variant='contained' onClick={() => setOpenModal(true)}>
           Raise Ticket
         </Button>
