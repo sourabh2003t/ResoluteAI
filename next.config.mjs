@@ -4,7 +4,7 @@ export default {
       {
         source: '/',
         destination: '/login',
-        permanent: true, // Set to false if this is temporary
+        permanent: false, // Set to false if this is temporary
       },
     ];
   },
