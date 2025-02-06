@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  basePath: "/Login.jsx",
+  basePath: "/Login",
   reactStrictMode: true
 }
 
