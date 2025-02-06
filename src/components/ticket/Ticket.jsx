@@ -257,7 +257,7 @@ const TicketPage = () => {
               fullWidth
               value={formData.title}
               onChange={handleChange}
-              sx={{ borderRadius: '8px', backgroundColor: '#F9FAFB' }}
+              sx={{ borderRadius: '8px'' }}
             />
             <TextField
               label='Description'
@@ -267,10 +267,10 @@ const TicketPage = () => {
               fullWidth
               value={formData.description}
               onChange={handleChange}
-              sx={{ borderRadius: '8px', backgroundColor: '#F9FAFB' }}
+              sx={{ borderRadius: '8px' }}
             />
 
-            <FormControl fullWidth sx={{ backgroundColor: '#F9FAFB' }}>
+            <FormControl fullWidth >
               <InputLabel>Priority</InputLabel>
               <Select label='Category' name='priority' value={formData.priority} onChange={handleChange}>
                 <MenuItem value='High'>High</MenuItem>
@@ -279,7 +279,7 @@ const TicketPage = () => {
               </Select>
             </FormControl>
 
-            <FormControl fullWidth sx={{ backgroundColor: '#F9FAFB' }}>
+            <FormControl fullWidth >
               <InputLabel>Category</InputLabel>
               <Select label='Category' name='category' value={formData.category} onChange={handleChange}>
                 <MenuItem value='Bug Report'>Bug Report</MenuItem>
@@ -309,7 +309,7 @@ const TicketPage = () => {
               fullWidth
               value={formData.contactEmail}
               onChange={handleChange}
-              sx={{ borderRadius: '8px', backgroundColor: '#F9FAFB' }}
+              sx={{ borderRadius: '8px' }}
             />
 
             <TextField
@@ -319,7 +319,7 @@ const TicketPage = () => {
               fullWidth
               value={formData.phoneNumber}
               onChange={handleChange}
-              sx={{ borderRadius: '8px', backgroundColor: '#F9FAFB' }}
+              sx={{ borderRadius: '8px' }}
             />
 
             <TextField
@@ -332,10 +332,10 @@ const TicketPage = () => {
               InputLabelProps={{
                 shrink: true
               }}
-              sx={{ borderRadius: '8px', backgroundColor: '#F9FAFB' }}
+              sx={{ borderRadius: '8px' }}
             />
 
-            <FormControl fullWidth sx={{ backgroundColor: '#F9FAFB' }}>
+            <FormControl fullWidth >
               <InputLabel>Status</InputLabel>
               <Select label='Status' name='status' value={formData.status} onChange={handleChange}>
                 <MenuItem value='Open'>Open</MenuItem>
@@ -345,7 +345,7 @@ const TicketPage = () => {
               </Select>
             </FormControl>
 
-            <FormControl fullWidth sx={{ backgroundColor: '#F9FAFB' }}>
+            <FormControl fullWidth >
               <InputLabel>Assigned Department</InputLabel>
               <Select
                 label='Assigned Department'
@@ -361,7 +361,7 @@ const TicketPage = () => {
               </Select>
             </FormControl>
 
-            <FormControl fullWidth sx={{ backgroundColor: '#F9FAFB' }}>
+            <FormControl fullWidth >
               <InputLabel>Impact Level</InputLabel>
               <Select label='Impact Level' name='impactLevel' value={formData.impactLevel} onChange={handleChange}>
                 <MenuItem value='Individual'>Individual</MenuItem>
