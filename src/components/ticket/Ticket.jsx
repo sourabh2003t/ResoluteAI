@@ -35,7 +35,7 @@ import { collection, addDoc, deleteDoc, doc, getDocs, query, where } from 'fireb
 
 import { db } from '../../../firebase'
 
-import VerticalMenu from '../layout/vertical/VerticalMenu';
+// import VerticalMenu from '../layout/vertical/VerticalMenu';
 
 
 const TicketPage = () => {
