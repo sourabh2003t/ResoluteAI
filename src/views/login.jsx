@@ -39,6 +39,7 @@ const Login = ({ mode }) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('');
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // Track login state
   
   // Vars
   const darkImg = '/images/pages/auth-v1-mask-dark.png'
@@ -51,19 +52,22 @@ const Login = ({ mode }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError(''); // Clear previous errors
+    setError('');
 
     try {
-      const userCredential = await signInWithEmailAndPassword(auth, email, password);
-      console.log('User logged in:', userCredential);
-      
-      // Ensure router pushes after successful login
-      router.push('/ticket');
+      await signInWithEmailAndPassword(auth, email, password);
+      console.log('User logged in');
+      setIsLoggedIn(true); // Show Ticket page instead of navigating
     } catch (error) {
       console.error('Login failed:', error);
-      setError(error.message); // Show error message to user
+      setError(error.message);
     }
   };
+
+  // Show Ticket component if logged in
+  if (isLoggedIn) {
+    return <Ticket />;
+  }
 
   return (
     <div className='flex flex-col justify-center items-center min-bs-[100dvh] relative p-6'>
