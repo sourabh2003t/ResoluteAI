@@ -60,7 +60,7 @@ const Login = ({ mode }) => {
       console.log('User logged in');
 
       // ✅ Redirect to the base path (`/`)
-      router.replace('/');
+      window.location.href = '/';
     } catch (error) {
       console.error('Login failed:', error);
       setError(error.message);
