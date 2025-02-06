@@ -58,14 +58,17 @@ const Login = ({ mode }) => {
     try {
       await signInWithEmailAndPassword(auth, email, password);
       console.log('User logged in');
-
-      // ✅ Redirect to the base path (`/`)
-      window.location.href = '/';
+      setIsLoggedIn(true); // Show Ticket page instead of navigating
     } catch (error) {
       console.error('Login failed:', error);
       setError(error.message);
     }
   };
+
+  // Show Ticket component if logged in
+  if (isLoggedIn) {
+    return <Ticket />;
+  }
 
   return (
     <div className='flex flex-col justify-center items-center min-bs-[100dvh] relative p-6'>
