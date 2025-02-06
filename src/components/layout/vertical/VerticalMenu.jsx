@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { signOut } from 'firebase/auth';
-import { auth } from '@/firebase'; // Ensure correct Firebase import
+import { auth } from '../../firebase'; // Ensure correct Firebase import
 
 export default function VerticalMenu() {
   const router = useRouter();
