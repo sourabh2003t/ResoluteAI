@@ -1,62 +1,31 @@
-// MUI Imports
-import Chip from '@mui/material/Chip'
-import { useTheme } from '@mui/material/styles'
+import Link from 'next/link';
 
-// Third-party Imports
-import PerfectScrollbar from 'react-perfect-scrollbar'
-
-// Component Imports
-import { Menu, SubMenu, MenuItem, MenuSection } from '@menu/vertical-menu'
-
-// Hook Imports
-import useVerticalNav from '@menu/hooks/useVerticalNav'
-
-// Styled Component Imports
-import StyledVerticalNavExpandIcon from '@menu/styles/vertical/StyledVerticalNavExpandIcon'
-
-// Style Imports
-import menuItemStyles from '@core/styles/vertical/menuItemStyles'
-import menuSectionStyles from '@core/styles/vertical/menuSectionStyles'
-
-const RenderExpandIcon = ({ open, transitionDuration }) => (
-  <StyledVerticalNavExpandIcon open={open} transitionDuration={transitionDuration}>
-    <i className='ri-arrow-right-s-line' />
-  </StyledVerticalNavExpandIcon>
-)
-
-const VerticalMenu = ({ scrollMenu }) => {
-  // Hooks
-  const theme = useTheme()
-  const { isBreakpointReached, transitionDuration } = useVerticalNav()
-  const ScrollWrapper = isBreakpointReached ? 'div' : PerfectScrollbar
-
+export default function VerticalMenu() {
   return (
-    // eslint-disable-next-line lines-around-comment
-    /* Custom scrollbar instead of browser scroll, remove if you want browser scroll only */
-    <ScrollWrapper
-      {...(isBreakpointReached
-        ? {
-            className: 'bs-full overflow-y-auto overflow-x-hidden',
-            onScroll: container => scrollMenu(container, false)
-          }
-        : {
-            options: { wheelPropagation: false, suppressScrollX: true },
-            onScrollY: container => scrollMenu(container, true)
-          })}
-    >
-      {/* Incase you also want to scroll NavHeader to scroll with Vertical Menu, remove NavHeader from above and paste it below this comment */}
-      {/* Vertical Menu */}
-      <Menu
-        menuItemStyles={menuItemStyles(theme)}
-        renderExpandIcon={({ open }) => <RenderExpandIcon open={open} transitionDuration={transitionDuration} />}
-        renderExpandedMenuItemIcon={{ icon: <i className='ri-circle-line' /> }}
-        menuSectionStyles={menuSectionStyles(theme)}
-      >
-        <MenuItem href={`/`}>Ticket</MenuItem>
-        <MenuItem target='_blank'>Log out</MenuItem>
-      </Menu>
-    </ScrollWrapper>
-  )
+    <div className="h-screen w-64 bg-gray-800 text-white fixed top-0 left-0 p-4">
+      <h2 className="text-xl font-bold mb-4">Menu</h2>
+      <ul className="space-y-3">
+        <li>
+          <Link href="/">
+            <span className="block p-2 rounded hover:bg-gray-700 cursor-pointer">Home</span>
+          </Link>
+        </li>
+        <li>
+          <Link href="/ticket">
+            <span className="block p-2 rounded hover:bg-gray-700 cursor-pointer">Tickets</span>
+          </Link>
+        </li>
+        <li>
+          <Link href="/settings">
+            <span className="block p-2 rounded hover:bg-gray-700 cursor-pointer">Settings</span>
+          </Link>
+        </li>
+        <li>
+          <button className="w-full text-left p-2 rounded hover:bg-gray-700">
+            Logout
+          </button>
+        </li>
+      </ul>
+    </div>
+  );
 }
-
-export default VerticalMenu
