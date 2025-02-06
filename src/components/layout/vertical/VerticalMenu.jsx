@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { signOut } from 'firebase/auth';
-import { auth } from '../../firebase'; // Ensure correct Firebase import
+import { auth } from '../../../../firebase'
 
 export default function VerticalMenu() {
   const router = useRouter();
@@ -11,14 +11,14 @@ export default function VerticalMenu() {
 
     if (path === '/login') {
       try {
-        await signOut(auth); // ✅ Logout from Firebase
+        await signOut(auth); 
         console.log('User logged out');
       } catch (error) {
         console.error('Logout failed:', error);
       }
     }
 
-    router.push(path); // ✅ Navigate to the specified path
+    router.push(path); 
   };
   
   return (
