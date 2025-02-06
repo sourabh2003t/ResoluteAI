@@ -38,6 +38,8 @@ const Login = ({ mode }) => {
   const [isPasswordShown, setIsPasswordShown] = useState(false)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [error, setError] = useState('');
+
 
   // Vars
   const darkImg = '/images/pages/auth-v1-mask-dark.png'
@@ -48,17 +50,21 @@ const Login = ({ mode }) => {
   const authBackground = useImageVariant(mode, lightImg, darkImg)
   const handleClickShowPassword = () => setIsPasswordShown(show => !show)
 
-  const handleSubmit = e => {
-    e.preventDefault()
-    signInWithEmailAndPassword(auth, email, password)
-      .then(userCredential => {
-        console.log(userCredential)
-        router.push('/')
-      })
-      .catch(error => {
-        console.log(error)
-      })
-  }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError(''); // Clear previous errors
+
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      console.log('User logged in:', userCredential);
+      
+      // Ensure router pushes after successful login
+      router.push('/ticket');
+    } catch (error) {
+      console.error('Login failed:', error);
+      setError(error.message); // Show error message to user
+    }
+  };
 
   return (
     <div className='flex flex-col justify-center items-center min-bs-[100dvh] relative p-6'>
