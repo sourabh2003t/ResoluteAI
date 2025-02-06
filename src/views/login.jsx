@@ -22,6 +22,8 @@ import Divider from '@mui/material/Divider'
 import { signInWithEmailAndPassword } from 'firebase/auth'
 
 import { auth } from '../../firebase'
+import Ticket from '@/components/ticket/Ticket'; // Import Ticket component
+
 
 // Component Imports
 import Logo from '@components/layout/shared/Logo'
