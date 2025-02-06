@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  basePath: "/Login",
+  basePath: "/login",
   reactStrictMode: true
-};
+}
 
-module.exports = nextConfig;
+export default nextConfig
