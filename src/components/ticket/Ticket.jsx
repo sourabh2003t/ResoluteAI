@@ -35,6 +35,9 @@ import { collection, addDoc, deleteDoc, doc, getDocs, query, where } from 'fireb
 
 import { db } from '../../../firebase'
 
+import VerticalMenu from '../layout/vertical/VerticalMenu';
+
+
 const TicketPage = () => {
   const [formData, setFormData] = useState({
     title: '',
@@ -161,6 +164,7 @@ const TicketPage = () => {
   return (
     <Card>
       <div className='flex justify-end p-4'>
+         <VerticalMenu />
         <Button variant='contained' onClick={() => setOpenModal(true)}>
           Raise Ticket
         </Button>
