@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  basePath: "./src/views/Login.jsx",
+  basePath: "/Login.jsx",
   reactStrictMode: true
 }
 
